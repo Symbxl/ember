@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+Host: https://sterlingember.com
+Sitemap: https://sterlingember.com/sitemap.xml

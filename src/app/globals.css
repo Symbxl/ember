@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { background: #ffffff; color: #0a0a0b; }
+::selection { background: #f97316; color: #ffffff; }
+html { scroll-behavior: smooth; }
+
+@layer base {
+  body {
+    font-feature-settings: "ss01", "ss03", "cv11", "calt";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-feature-settings: "ss01", "ss03", "cv11", "calt";
+    letter-spacing: -0.022em;
+  }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-ember-400;
+  }
+
+  .h-display {
+    @apply font-display tracking-tight text-cream-50;
+  }
+
+  /* Buttons — Cursor/Resend style: gradient primary, glass ghost, mono affordance */
+  .btn-ember {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5;
+    background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+    box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.4) inset, 0 12px 30px -10px rgba(249, 115, 22, 0.55);
+  }
+  .btn-ember:hover {
+    box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.6) inset, 0 20px 50px -10px rgba(249, 115, 22, 0.75);
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink-700 bg-white px-6 py-3 font-semibold text-ink-50 transition-all duration-300 hover:border-ink-600 hover:bg-ink-900 hover:-translate-y-0.5;
+  }
+  .btn-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink-50 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-ink-100 hover:-translate-y-0.5;
+  }
+
+  /* Inputs — white surface, neutral border */
+  .input {
+    @apply w-full rounded-lg border border-ink-700 bg-white px-3.5 py-2.5 text-ink-50 placeholder:text-ink-400 focus:border-ember-500 focus:outline-none focus:ring-2 focus:ring-ember-500/30 transition;
+  }
+  .label {
+    @apply mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink-400;
+  }
+
+  /* Cards — white surface, soft border, gentle shadow */
+  .glass {
+    @apply rounded-2xl border border-ink-700 bg-white;
+  }
+  .glass-strong {
+    @apply rounded-2xl border border-ink-700 bg-white shadow-soft;
+  }
+  .glass-hover {
+    @apply transition-all duration-500 hover:border-ink-600 hover:-translate-y-1 hover:shadow-lift;
+  }
+
+  /* The "mono pill" status badge */
+  .mono-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink-700 bg-ink-900 px-3 py-1.5 font-mono text-[11px] font-medium tracking-wider text-ink-300;
+  }
+
+  /* Gradient text — for the hero word */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, #fdba74 0%, #fb923c 30%, #f97316 60%, #ea580c 100%);
+    background-size: 200% 100%;
+  }
+
+  /* Card with subtle gradient border on hover */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(180deg, rgba(15,23,42,0.02), rgba(15,23,42,0.005));
+  }
+  .gradient-border::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(180deg, rgba(15,23,42,0.08), rgba(15,23,42,0.02));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity .35s ease;
+  }
+  .gradient-border:hover::before {
+    background: linear-gradient(120deg, rgba(251,146,60,0.55), rgba(249,115,22,0.45), rgba(234,88,12,0.55));
+  }
+
+  /* Decorative code snippet block */
+  .code-snippet {
+    @apply font-mono text-[12px] leading-relaxed rounded-xl border border-ink-700 bg-ink-900 px-4 py-3 text-ink-200;
+  }
+
+  /* Scroll-reveal helpers (Reveal component falls back to these) */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+}
+
+@layer utilities {
+  /* Halo + soft tint around photographic cards on hover */
+  .ring-glow-ember {
+    box-shadow:
+      0 0 0 1px rgba(251, 146, 60, 0.30),
+      0 30px 80px -30px rgba(249, 115, 22, 0.45),
+      0 10px 40px -10px rgba(15, 23, 42, 0.12);
+  }
+
+  .img-warm { filter: saturate(1) contrast(1.05) brightness(0.92); }
+  .img-mask-bottom {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+  .img-mask-radial {
+    -webkit-mask-image: radial-gradient(75% 75% at 50% 35%, black 55%, transparent 95%);
+            mask-image: radial-gradient(75% 75% at 50% 35%, black 55%, transparent 95%);
+  }
+
+  .will-drift { will-change: transform; }
+
+  /* Hides the native scroll fade on FAQ details disclosure marker */
+  details > summary::-webkit-details-marker { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-floaty, .animate-marquee, .animate-marquee-slow,
+    .animate-fade-up, .animate-blur-in, .animate-ember-pulse,
+    .animate-drift-slow, .animate-gradient-pan, .animate-pulse-dot {
+      animation: none !important;
+    }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+}
