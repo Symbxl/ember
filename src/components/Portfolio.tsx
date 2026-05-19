@@ -13,7 +13,6 @@ type Item = {
   tags: string[];
   accent: string;
   image: string;
-  feature?: boolean;
 };
 
 const items: Item[] = [
@@ -25,8 +24,7 @@ const items: Item[] = [
       "An AI-powered creator OS with a custom terminal UI, real-time dashboards, and a fully integrated content pipeline.",
     tags: ["SaaS", "Dashboard", "AI"],
     accent: "#2970FF",
-    image: "/portfolio/creator.png",
-    feature: true
+    image: "/portfolio/creator.png"
   },
   {
     name: "Relight Exterior",
@@ -204,8 +202,6 @@ function Card({ item, priority = false }: { item: Item; priority?: boolean }) {
 }
 
 export default function Portfolio({ withCta = true }: { withCta?: boolean }) {
-  const [featured, ...rest] = items;
-
   return (
     <section className="relative isolate overflow-hidden bg-[#FAFAFB] py-20 md:py-28">
       {/* Decorative backdrop */}
@@ -246,110 +242,10 @@ export default function Portfolio({ withCta = true }: { withCta?: boolean }) {
           </div>
         </Reveal>
 
-        {/* Featured project — full width */}
-        <Reveal>
-          <div className="mt-14 md:mt-16">
-            <div
-              className="relative grid overflow-hidden rounded-[24px] border border-[rgba(15,23,42,0.08)] bg-white shadow-[0_1px_2px_rgba(15,23,42,0.04),0_18px_44px_rgba(15,23,42,0.08)] lg:grid-cols-[1.35fr_1fr]"
-              style={
-                {
-                  ["--accent" as string]: featured.accent
-                } as React.CSSProperties
-              }
-            >
-              {/* Image side */}
-              <a
-                href={featured.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block overflow-hidden"
-              >
-                <div
-                  className="relative w-full"
-                  style={{ aspectRatio: "16 / 10" }}
-                >
-                  <Image
-                    src={featured.image}
-                    alt={`${featured.name} website screenshot`}
-                    fill
-                    sizes="(min-width: 1024px) 56vw, 100vw"
-                    priority
-                    className="object-cover object-top transition-transform duration-[1400ms] ease-out group-hover:scale-[1.03]"
-                  />
-                  {/* Browser chrome */}
-                  <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] flex items-center gap-1.5 bg-gradient-to-b from-white/95 to-white/0 px-5 py-3 backdrop-blur-[2px]">
-                    <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                    <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-                    <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-                    <span className="ml-3 inline-flex items-center gap-1.5 rounded-md bg-white/95 px-2.5 py-1 font-mono text-[11px] text-[#64748B] ring-1 ring-[rgba(15,23,42,0.06)]">
-                      <span
-                        className="h-1.5 w-1.5 rounded-full"
-                        style={{ backgroundColor: featured.accent }}
-                      />
-                      {featured.display}
-                    </span>
-                  </div>
-                </div>
-              </a>
-
-              {/* Copy side */}
-              <div className="flex flex-col justify-center gap-5 p-7 md:p-10">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="rounded-full px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em]"
-                    style={{
-                      backgroundColor: hexToRgba(featured.accent, 0.12),
-                      color: featured.accent
-                    }}
-                  >
-                    Featured Project
-                  </span>
-                </div>
-                <h3 className="font-display text-3xl font-extrabold leading-[1.1] tracking-[-0.025em] text-ink-50 md:text-4xl">
-                  {featured.name}
-                </h3>
-                <p className="text-[1rem] leading-[1.65] text-[#55627A]">
-                  {featured.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {featured.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-md px-2 py-[3px] text-[11px] font-semibold uppercase tracking-[0.3px]"
-                      style={{
-                        backgroundColor: hexToRgba(featured.accent, 0.12),
-                        color: featured.accent
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="mt-2 flex items-center gap-3">
-                  <a
-                    href={featured.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5"
-                    style={{ backgroundColor: featured.accent }}
-                  >
-                    Visit live site
-                    <ArrowUpRight size={15} strokeWidth={2.4} />
-                  </a>
-                  <span className="font-mono text-xs text-[#94A3B8]">
-                    {featured.display}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Rest of the grid */}
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {rest.map((item, i) => (
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 md:mt-16">
+          {items.map((item, i) => (
             <Reveal key={item.name} delay={i * 80}>
-              <Card item={item} />
+              <Card item={item} priority={i === 0} />
             </Reveal>
           ))}
         </div>
