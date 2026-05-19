@@ -29,13 +29,6 @@ const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
 };
 
-const heroStats = [
-  { value: "+182%", label: "Avg. organic traffic / 6 mo" },
-  { value: "2.4×", label: "Lead conversion vs. prior site" },
-  { value: "4–6", label: "Weeks kickoff → launch" },
-  { value: "97%", label: "Client retention, year two" }
-];
-
 const heroLogos = [
   "Creator Terminal",
   "Relight Exterior",
@@ -60,20 +53,9 @@ export default function LandingPage() {
 
         <div className="container-x pt-16 md:pt-24 pb-16 md:pb-24 grid gap-14 lg:grid-cols-[1.2fr_1fr] lg:items-center">
           <motion.div variants={stagger} initial="hidden" animate="show">
-            {/* Status pill */}
-            <motion.div variants={fadeUp}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-ember-500/30 bg-ember-50 px-3 py-1.5 text-[12px] font-semibold text-ember-700">
-                <span className="relative grid h-2 w-2 place-items-center">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-ember-500 opacity-60 animate-ping" />
-                  <span className="relative h-2 w-2 rounded-full bg-ember-500" />
-                </span>
-                Now booking July 2026 — 2 slots left
-              </span>
-            </motion.div>
-
             <motion.h1
               variants={fadeUp}
-              className="mt-5 font-display font-semibold text-[44px] sm:text-6xl lg:text-[80px] leading-[1.0] tracking-[-0.03em] text-cream-50"
+              className="font-display font-semibold text-[44px] sm:text-6xl lg:text-[80px] leading-[1.0] tracking-[-0.03em] text-cream-50"
             >
               Websites that{" "}
               <span className="relative inline-block">
@@ -184,30 +166,6 @@ export default function LandingPage() {
               <LeadForm />
             </div>
           </motion.div>
-        </div>
-
-        {/* Stat strip — anchors the hero, eliminates the "generic" feel */}
-        <div className="relative border-y border-ink-700/80 bg-white/60 backdrop-blur-[2px]">
-          <div className="container-x">
-            <div className="grid divide-x divide-ink-700/70 sm:grid-cols-2 lg:grid-cols-4">
-              {heroStats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.6 + i * 0.08, ease: "easeOut" }}
-                  className="flex flex-col gap-1 px-5 py-6 md:px-7 md:py-7"
-                >
-                  <span className="font-display text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-ink-50">
-                    {s.value}
-                  </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-400">
-                    {s.label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Logo marquee */}
