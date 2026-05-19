@@ -1,6 +1,10 @@
 node_modules
 .next
+.next-*
+.next.*
 out
+tmp
 .env*.local
 .DS_Store
 *.log
+tsconfig.tsbuildinfo
